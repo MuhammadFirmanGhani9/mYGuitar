@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | mYGuitar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --black: #121212;
+            --white: #f0f0f0;
+            --green: #4CAF50;
+            --dark-green: #2E7D32;
+            --light-green: #A5D6A7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-image: url('bg2.png');
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .profile-card {
+            background: linear-gradient(0deg, #50505045, #0a0a0a45);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--green), var(--light-green), var(--green));
+        }
+        
+        .header {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--green), transparent);
+        }
+        
+        .logo {
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo-text {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--white), var(--green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+        
+        .logo-text span {
+            color: var(--green);
+            -webkit-text-fill-color: var(--green);
+        }
+        
+        .title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--green);
+        }
+        
+        .profile-info {
+            width: 100%;
+            padding: 1.5rem;
+        }
+        
+        .info-item {
+            display: flex;
+            margin-bottom: 0.8rem;
+        }
+        
+        .info-label {
+            width: 140px;
+            font-weight: 600;
+            color: var(--light-green);
+        }
+        
+        .info-value {
+            flex: 1;
+        }
+        
+        .university {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+            font-style: italic;
+            color: var(--light-green);
+        }
+        
+        .about-section {
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+        
+        .about-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--green);
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+        
+        .about-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--green);
+            border-radius: 10px;
+        }
+        
+        .about-content {
+            line-height: 1.7;
+        }
+        
+        .about-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .about-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .about-content strong {
+            color: var(--light-green);
+            font-weight: 600;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--black);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--green);
+        }
+        
+        .social-icon:hover {
+            background-color: var(--green);
+            color: var(--black);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .info-item {
+                flex-direction: column;
+                margin-bottom: 1.2rem;
+            }
+            
+            .info-label {
+                width: 100%;
+                margin-bottom: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-card">
+            <div class="header">
+                
+                <div class="logo">
+                    <a href="index.html" style="text-decoration: none;">
+                    <h1 class="logo-text">mY<span>Guitar</span></h1></a>
+                </div>
+                <h2 class="title">Data Programmer</h2>
+                <div class="profile-info">
+                    <div class="info-item">
+                        <div class="info-label">Nama</div>
+                        <div class="info-value">Muhammad Firman Ghani</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">NIM</div>
+                        <div class="info-value">24343061</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Program Studi</div>
+                        <div class="info-value">Informatika</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Departemen</div>
+                        <div class="info-value">Elektronika</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Fakultas</div>
+                        <div class="info-value">Teknik</div>
+                    </div>
+                </div>
+                <div class="university">
+                    Universitas Negeri Padang | 2025
+                </div>
+            </div>
+        </div>
+        
+        <div class="about-section">
+            <h3 class="about-title">Tentang mYGuitar</h3>
+            <div class="about-content">
+                <p>mYGuitar adalah marketplace khusus untuk jual beli gitar dan ukulele. Platform ini dirancang untuk menghubungkan pecinta gitar, kolektor, dan musisi dengan berbagai pilihan gitar berkualitas dari penjual terpercaya.</p>
+                
+                <p><strong>Syarat Penjualan:</strong></p>
+                <ul>
+                    <li>Penjual harus mendaftar dan melengkapi proses verifikasi</li>
+                    <li>Produk yang dijual harus asli dan sesuai dengan deskripsi</li>
+                    <li>Foto produk harus jelas dan menunjukkan kondisi sebenarnya</li>
+                    <li>Vendor dikenakan komisi mutlak sebesar Rp 45.000 per produk yang ditambahkan ke marketplace</li>
+                    <li>Pengiriman harus dilakukan sesegera mungkin setelah pembayaran</li>
+                </ul>
+                
+                <p><strong>Syarat Pembelian:</strong></p>
+                <ul>
+                    <li>Pembeli harus memiliki akun terverifikasi di mYGuitar</li>
+                    <li>Pembayaran harus dilakukan melalui sistem mYGuitar</li>
+                    <li>Konfirmasi penerimaan barang wajib dilakukan dalam 3 hari</li>
+                    <li>Pengembalian produk hanya berlaku untuk kerusakan dalam pengiriman</li>
+                </ul>
+                
+                <p><strong>Sistem Sign Up:</strong></p>
+                <p>Pendaftaran akun mYGuitar dapat dilakukan dengan mudah melalui email atau media sosial. Verifikasi identitas diperlukan untuk keamanan transaksi dan kepercayaan komunitas.</p>
+                
+                <p><strong>Sistem Sign In:</strong></p>
+                <p>Masuk ke akun mYGuitar dapat dilakukan dengan email dan password atau melalui autentikasi dua faktor untuk keamanan tambahan. Sesi login akan aktif selama 24 jam sebelum perlu login ulang.</p>
+            </div>
+            <div class="university">
+                    Hubungi kami :
+                </div>
+            <div class="social-links">
+                <a href="https://www.facebook.com/profile.php?id=100055798496173" class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://wa.me/6281261017232" class="social-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.instagram.com/firghan.png/?hl=en" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/@arrival4852" class="social-icon">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            &copy; 2025 mYGuitar. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>

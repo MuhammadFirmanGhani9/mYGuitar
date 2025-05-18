@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keuntungan Bergabung dengan mYGuitar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --main-green: #2ecc71;
+            --dark-green: #27ae60;
+            --white: #ffffff;
+            --black: #333333;
+            --light-gray: #f9f9f9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--black);
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 300px;
+            background-color: var(--black);
+            color: var(--white);
+            padding: 2rem;
+            position: fixed;
+            height: 100vh;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        .back-button {
+            margin-top: 2rem;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--white);
+            color: var(--main-green);
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .back-button:hover {
+            background-color: var(--dark-green);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        
+        .back-button i {
+            margin-right: 5px;
+        }
+        
+        .main-content {
+            flex: 1;
+            margin-left: 300px;
+            padding: 3rem;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--dark-green);
+            border-bottom: 3px solid var(--main-green);
+            padding-bottom: 1rem;
+            position: relative;
+        }
+        
+        .page-title::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background-color: var(--dark-green);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin: 2rem 0 1.5rem;
+            color: var(--dark-green);
+        }
+        
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .benefit-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--main-green);
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 20px rgba(0,0,0,0.1);
+        }
+        
+        .icon-wrapper {
+            background-color: var(--main-green);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            color: var(--white);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .card-content {
+            flex: 1;
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark-green);
+        }
+        
+        .card-description {
+            color: var(--black);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1.5rem;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-guitar"></i>
+                <span style="color: var(--main-green)">m</span>YGuitar
+            </div>
+            <p>Marketplace gitar terlengkap dan terpercaya di Indonesia</p>
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </a>
+        </aside>
+        
+        <main class="main-content">
+            <h1 class="page-title">Keuntungan Bergabung dengan mYGuitar</h1>
+            
+            <h2 class="section-title">Benefit untuk Customer</h2>
+            <div class="card-container">
+                <div class="benefit-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Harga Bersaing dan Transparan</h3>
+                        <p class="card-description">Dapatkan penawaran terbaik dari berbagai vendor gitar dengan sistem perbandingan harga yang memudahkan Anda menemukan produk berkualitas dengan harga terjangkau. Semua harga ditampilkan secara transparan tanpa biaya tersembunyi.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Produk Berkualitas & Terjamin</h3>
+                        <p class="card-description">Semua produk di mYGuitar telah melalui proses verifikasi dan penjaminan kualitas. Kami memastikan setiap gitar yang dijual memenuhi standar kualitas dan keaslian, sehingga Anda dapat berbelanja dengan tenang dan percaya diri.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Pengiriman Cepat & Aman</h3>
+                        <p class="card-description">Nikmati layanan pengiriman yang cepat ke seluruh Indonesia dengan sistem perlindungan pengiriman khusus untuk alat musik. Kami menggunakan partner logistik terpercaya dan menawarkan asuransi pengiriman untuk memastikan gitar Anda tiba dengan selamat.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-headphones-alt"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Layanan Konsultasi Gratis</h3>
+                        <p class="card-description">Bingung memilih gitar yang tepat? Manfaatkan layanan konsultasi gratis dengan para ahli gitar kami. Dapatkan saran profesional sesuai kebutuhan, budget, dan tingkat kemampuan Anda untuk menemukan instrumen yang sempurna.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Garansi & Kebijakan Pengembalian</h3>
+                        <p class="card-description">Berbelanja dengan tenang berkat kebijakan garansi dan pengembalian yang berpihak pada customer. Jika ada masalah dengan produk, Anda memiliki waktu 7 hari untuk pengembalian dan mendapatkan garansi resmi untuk setiap pembelian.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title">Benefit untuk Vendor</h2>
+            <div class="card-container">
+                <div class="benefit-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Akses ke Pasar yang Luas</h3>
+                        <p class="card-description">Jangkau ribuan calon pembeli potensial dari seluruh Indonesia melalui platform digital kami. Tingkatkan visibilitas bisnis Anda dan perluas jangkauan penjualan tanpa batasan geografis.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Alat Manajemen Toko Lengkap</h3>
+                        <p class="card-description">Kelola inventaris, pesanan, dan penjualan dengan mudah melalui dashboard vendor yang intuitif. Fitur analitik membantu Anda memahami tren penjualan, perilaku pembeli, dan area yang perlu ditingkatkan untuk memaksimalkan keuntungan.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Biaya Komisi Rendah</h3>
+                        <p class="card-description">Nikmati biaya komisi yang kompetitif dan transparan dibandingkan marketplace lainnya. Tidak ada biaya pendaftaran atau biaya bulanan—Anda hanya membayar komisi kecil ketika berhasil melakukan penjualan.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Pencairan Dana Cepat</h3>
+                        <p class="card-description">Dapatkan pembayaran dari penjualan Anda dengan cepat dan aman. Sistem pencairan dana kami menjamin Anda menerima uang tepat waktu, dengan pilihan metode pembayaran yang beragam sesuai kebutuhan bisnis Anda.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Program Promosi & Pemasaran</h3>
+                        <p class="card-description">Manfaatkan berbagai program promosi dan pemasaran yang kami sediakan untuk meningkatkan penjualan. Termasuk spot iklan premium, kesempatan tampil di halaman utama, dan partisipasi dalam event promo besar mYGuitar.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Pelatihan & Dukungan Vendor</h3>
+                        <p class="card-description">Akses berbagai materi pelatihan dan sumber daya untuk mengembangkan bisnis Anda. Tim dukungan vendor kami siap membantu Anda 7 hari seminggu untuk menyelesaikan masalah teknis atau pertanyaan seputar platform.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer style="background-color: var(--black); color: var(--white); padding: 1rem; text-align: center;">
+        <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;">
+            <i class="fas fa-guitar"></i>
+            <span style="color: var(--main-green)">m</span>YGuitar
+        </div>
+        <p>© 2025 mYGuitar. Semua hak dilindungi.</p>
+    </footer>
+</body>
+</html>

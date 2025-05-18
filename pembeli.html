@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mY Guitar Mart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .search-bar {
+            display: flex;
+            width: 50%;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+        .search-bar button {
+            background-color: #4dff47;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        .user-actions a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+        nav {
+            background-color: #444;
+            padding: 10px 0;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 15px;
+            margin: 0 10px;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background-color: #4dff47;
+            border-radius: 4px;
+        }
+        .category-title {
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4dff47;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .product-info {
+            padding: 15px;
+        }
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .product-seller {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .product-price {
+            font-weight: bold;
+            color: #4dff47;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .product-rating {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+        .product-action {
+            display: flex;
+            justify-content: space-between;
+        }
+        .product-action button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .buy-now {
+            background-color: #4dff47;
+            color: white;
+        }
+        .add-cart {
+            background-color: transparent;
+            border: 1px solid #4dff47 !important;
+            color: #4dff47;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        .footer-section h3 {
+            margin-bottom: 20px;
+            border-bottom: 2px solid #4dff47;
+            padding-bottom: 5px;
+            width: fit-content;
+        }
+        .footer-section a, .footer-section p {
+            color: #ddd;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #555;
+        }
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .search-bar {
+                width: 70%;
+            }
+        }
+        @media (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            .search-bar {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .header-content {
+                flex-direction: column;
+            }
+            .user-actions {
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Guitar World</h1>
+                <div class="search-bar">
+                    <input type="text" placeholder="Cari gitar atau ukulele...">
+                    <button>Cari</button>
+                </div>
+                <div class="user-actions">
+                    <a href="#">Keranjang</a>
+                    <a href="#">Akun Saya</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <div class="nav-links">
+                <a href="#" class="active">Beranda</a>
+                <a href="#acoustic">Gitar Akustik</a>
+                <a href="#electric">Gitar Elektrik</a>
+                <a href="#electro-acoustic">Gitar Transkustik</a>
+                <a href="#ukulele">Ukulele</a>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <section id="acoustic">
+            <h2 class="category-title">Gitar Akustik</h2>
+            <div class="product-grid">
+                <!-- Acoustic Guitar 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Yamaha F310">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Seagull S6 Original - Cedar</h3>
+                        <p class="product-seller">Canadian Guitar Store</p>
+                        <p class="product-price">Rp 7.200.000</p>
+                        <div class="product-rating">★★★★☆ (108)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electro-Acoustic Guitar 9 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Washburn Festival EA15">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Washburn Festival EA15 - Trans Black</h3>
+                        <p class="product-seller">Guitar Pro Indonesia</p>
+                        <p class="product-price">Rp 4.900.000</p>
+                        <div class="product-rating">★★★★☆ (86)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="ukulele">
+            <h2 class="category-title">Ukulele</h2>
+            <div class="product-grid">
+                <!-- Ukulele 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Kala KA-15S Soprano">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Kala KA-15S Soprano - Mahogany</h3>
+                        <p class="product-seller">Ukulele Center</p>
+                        <p class="product-price">Rp 950.000</p>
+                        <div class="product-rating">★★★★★ (203)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ukulele 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Lanikai LU-21C Concert">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Lanikai LU-21C Concert - Natural</h3>
+                        <p class="product-seller">Island Music Shop</p>
+                        <p class="product-price">Rp 1.200.000</p>
+                        <div class="product-rating">★★★★☆ (157)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ukulele 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Cordoba 15CM Concert">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Cordoba 15CM Concert - Mahogany</h3>
+                        <p class="product-seller">Spanish Music Store</p>
+                        <p class="product-price">Rp 1.350.000</p>
+                        <div class="product-rating">★★★★☆ (124)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ukulele 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Fender Montecito Tenor">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Fender Montecito Tenor - Koa</h3>
+                        <p class="product-seller">Fender Official Store</p>
+                        <p class="product-price">Rp 2.800.000</p>
+                        <div class="product-rating">★★★★★ (97)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ukulele 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Martin T1K Tenor">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Martin T1K Tenor - Hawaiian Koa</h3>
+                        <p class="product-seller">Premium Music Store</p>
+                        <p class="product-price">Rp 7.500.000</p>
+                        <div class="product-rating">★★★★★ (76)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ukulele 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Enya EUC-X1">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Enya EUC-X1 Concert - HPL</h3>
+                        <p class="product-seller">Modern Music Shop</p>
+                        <p class="product-price">Rp 1.100.000</p>
+                        <div class="product-rating">★★★★☆ (185)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ukulele 7 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Ohana SK-25 Soprano">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Ohana SK-25 Soprano - Solid Spruce</h3>
+                        <p class="product-seller">Hawaiian Strings</p>
+                        <p class="product-price">Rp 1.850.000</p>
+                        <div class="product-rating">★★★★☆ (112)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ukulele 8 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Pono MTDE Tenor">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Pono MTDE Tenor - Ebony</h3>
+                        <p class="product-seller">Exotic Instruments Shop</p>
+                        <p class="product-price">Rp 5.250.000</p>
+                        <div class="product-rating">★★★★★ (68)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ukulele 9 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Flight DUC460 Concert">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Flight DUC460 Concert - Zebrawood</h3>
+                        <p class="product-seller">Melody Ukulele Shop</p>
+                        <p class="product-price">Rp 2.100.000</p>
+                        <div class="product-rating">★★★★☆ (93)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Guitar World</h3>
+                    <p>Toko alat musik terlengkap di Indonesia dengan koleksi gitar dan ukulele berkualitas tinggi.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links</h3>
+                    <a href="#">Tentang Kami</a>
+                    <a href="#">Kontak</a>
+                    <a href="#">Blog</a>
+                    <a href="#">FAQ</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Kategori</h3>
+                    <a href="#acoustic">Gitar Akustik</a>
+                    <a href="#electric">Gitar Elektrik</a>
+                    <a href="#electro-acoustic">Gitar Transkustik</a>
+                    <a href="#ukulele">Ukulele</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Kontak Kami</h3>
+                    <p>Jl. Musik No. 123, Jakarta</p>
+                    <p>Telp: 021-1234567</p>
+                    <p>Email: info@guitarworld.id</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Guitar World. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>Yamaha F310 - Natural</h3>
+                        <p class="product-seller">Toko Musik Prima</p>
+                        <p class="product-price">Rp 1.350.000</p>
+                        <div class="product-rating">★★★★☆ (120)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Acoustic Guitar 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Cort AD810">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Cort AD810 - Sunburst</h3>
+                        <p class="product-seller">Music Corner</p>
+                        <p class="product-price">Rp 1.250.000</p>
+                        <div class="product-rating">★★★★★ (95)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Acoustic Guitar 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Taylor GS Mini">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Taylor GS Mini - Mahogany</h3>
+                        <p class="product-seller">Jakarta Guitar Shop</p>
+                        <p class="product-price">Rp 8.500.000</p>
+                        <div class="product-rating">★★★★★ (210)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Acoustic Guitar 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Martin D-15M">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Martin D-15M - Mahogany</h3>
+                        <p class="product-seller">Premium Music Store</p>
+                        <p class="product-price">Rp 18.900.000</p>
+                        <div class="product-rating">★★★★★ (67)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Acoustic Guitar 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Epiphone DR-100">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Epiphone DR-100 - Ebony</h3>
+                        <p class="product-seller">Melody Music</p>
+                        <p class="product-price">Rp 2.100.000</p>
+                        <div class="product-rating">★★★★☆ (156)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Acoustic Guitar 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Takamine GD20">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Takamine GD20-NS - Natural Satin</h3>
+                        <p class="product-seller">Harmony Music</p>
+                        <p class="product-price">Rp 3.750.000</p>
+                        <div class="product-rating">★★★★☆ (89)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Acoustic Guitar 7 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Fender CD-60S">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Fender CD-60S - All-Mahogany</h3>
+                        <p class="product-seller">Fender Official Store</p>
+                        <p class="product-price">Rp 3.400.000</p>
+                        <div class="product-rating">★★★★☆ (142)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Acoustic Guitar 8 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Gretsch G5024E">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Gretsch G5024E - Rancher</h3>
+                        <p class="product-seller">Classic Guitar Shop</p>
+                        <p class="product-price">Rp 5.800.000</p>
+                        <div class="product-rating">★★★★☆ (73)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Acoustic Guitar 9 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Ibanez AC240">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Ibanez AC240 - Open Pore Natural</h3>
+                        <p class="product-seller">Guitar Center Indonesia</p>
+                        <p class="product-price">Rp 4.250.000</p>
+                        <div class="product-rating">★★★★☆ (105)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="electric">
+            <h2 class="category-title">Gitar Elektrik</h2>
+            <div class="product-grid">
+                <!-- Electric Guitar 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Fender Stratocaster">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Fender Player Stratocaster - Sunburst</h3>
+                        <p class="product-seller">Fender Official Store</p>
+                        <p class="product-price">Rp 12.500.000</p>
+                        <div class="product-rating">★★★★★ (184)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electric Guitar 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Gibson Les Paul">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Gibson Les Paul Standard - Cherry Burst</h3>
+                        <p class="product-seller">Premium Music Store</p>
+                        <p class="product-price">Rp 32.000.000</p>
+                        <div class="product-rating">★★★★★ (97)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electric Guitar 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Ibanez RG550">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Ibanez RG550 - Genesis Purple Neon</h3>
+                        <p class="product-seller">Rock Guitar Indonesia</p>
+                        <p class="product-price">Rp 15.300.000</p>
+                        <div class="product-rating">★★★★★ (122)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electric Guitar 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="PRS SE Custom 24">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">PRS SE Custom 24 - Fire Red Burst</h3>
+                        <p class="product-seller">Music Gallery</p>
+                        <p class="product-price">Rp 11.800.000</p>
+                        <div class="product-rating">★★★★☆ (135)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electric Guitar 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="ESP LTD EC-1000">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">ESP LTD EC-1000 - Vintage Black</h3>
+                        <p class="product-seller">Metal Guitar Shop</p>
+                        <p class="product-price">Rp 14.500.000</p>
+                        <div class="product-rating">★★★★★ (87)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electric Guitar 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Epiphone SG Standard">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Epiphone SG Standard - Cherry</h3>
+                        <p class="product-seller">Classic Rock Shop</p>
+                        <p class="product-price">Rp 7.500.000</p>
+                        <div class="product-rating">★★★★☆ (112)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electric Guitar 7 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Jackson JS32 Dinky">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Jackson JS32 Dinky - Snow White</h3>
+                        <p class="product-seller">Speed Metal Music</p>
+                        <p class="product-price">Rp 5.900.000</p>
+                        <div class="product-rating">★★★★☆ (98)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electric Guitar 8 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Gretsch G2622 Streamliner">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Gretsch G2622 Streamliner - Torino Green</h3>
+                        <p class="product-seller">Vintage Guitar Shop</p>
+                        <p class="product-price">Rp 8.200.000</p>
+                        <div class="product-rating">★★★★☆ (79)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electric Guitar 9 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Squier Classic Vibe '70s Stratocaster">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Squier Classic Vibe '70s Strat - Black</h3>
+                        <p class="product-seller">Jakarta Music Center</p>
+                        <p class="product-price">Rp 5.350.000</p>
+                        <div class="product-rating">★★★★☆ (146)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="electro-acoustic">
+            <h2 class="category-title">Gitar Transkustik</h2>
+            <div class="product-grid">
+                <!-- Electro-Acoustic Guitar 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Yamaha APX600">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Yamaha APX600 - Black</h3>
+                        <p class="product-seller">Yamaha Music Indonesia</p>
+                        <p class="product-price">Rp 3.800.000</p>
+                        <div class="product-rating">★★★★★ (167)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electro-Acoustic Guitar 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Taylor 214ce">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Taylor 214ce - Natural</h3>
+                        <p class="product-seller">Premium Guitar Indonesia</p>
+                        <p class="product-price">Rp 15.900.000</p>
+                        <div class="product-rating">★★★★★ (93)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electro-Acoustic Guitar 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Martin GPCPA4">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Martin GPCPA4 - Rosewood</h3>
+                        <p class="product-seller">High-End Guitar Shop</p>
+                        <p class="product-price">Rp 21.500.000</p>
+                        <div class="product-rating">★★★★★ (74)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electro-Acoustic Guitar 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Takamine GN93CE">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Takamine GN93CE - Natural</h3>
+                        <p class="product-seller">Music Village</p>
+                        <p class="product-price">Rp 6.750.000</p>
+                        <div class="product-rating">★★★★☆ (118)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electro-Acoustic Guitar 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Ibanez AEG50">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Ibanez AEG50 - Indigo Blue Burst</h3>
+                        <p class="product-seller">Music Corner</p>
+                        <p class="product-price">Rp 5.200.000</p>
+                        <div class="product-rating">★★★★☆ (132)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electro-Acoustic Guitar 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Fender CD-60SCE">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Fender CD-60SCE - Dreadnought</h3>
+                        <p class="product-seller">Fender Official Store</p>
+                        <p class="product-price">Rp 4.300.000</p>
+                        <div class="product-rating">★★★★☆ (155)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electro-Acoustic Guitar 7 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Cort Grand Regal GA5F">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Cort Grand Regal GA5F - Natural</h3>
+                        <p class="product-seller">Cort Indonesia Shop</p>
+                        <p class="product-price">Rp 5.700.000</p>
+                        <div class="product-rating">★★★★☆ (91)</div>
+                        <div class="product-action">
+                            <button class="add-cart">+ Keranjang</button>
+                            <button class="buy-now">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electro-Acoustic Guitar 8 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/320" alt="Seagull S6 Original">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">

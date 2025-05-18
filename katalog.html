@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog mYGuitar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #2E7D32;
+            --secondary-green: #43A047;
+            --light-green: #81C784;
+            --dark: #212121;
+            --light: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --nav-text: #FFFFFF;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        [data-theme="dark"] {
+            --primary-green: #43A047;
+            --secondary-green: #4CAF50;
+            --light-green: #81C784;
+            --dark: #F5F5F5;
+            --light: #121212;
+            --light-gray: #1E1E1E;
+            --nav-text: #F5F5F5;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--dark);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        
+        header {
+            background-color: var(--primary-green);
+            color: var(--light);
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 6px var(--shadow-color);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+        
+        .m {
+            color: var(--light-green);
+        }
+        .katalog {
+            color: var(--light-green);
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-menu a {
+            color: var(--nav-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--light-green);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--nav-text);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            color: var(--light-green);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .catalog-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary-green);
+        }
+        
+        .catalog-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+        
+        .product-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .card {
+            display: flex;
+            background-color: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px var(--shadow-color);
+        }
+        
+        .card-img {
+            flex: 0 0 40%;
+            max-width: 40%;
+            object-fit: cover;
+            background-color: var(--light-gray);
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .card:hover .card-img img {
+            transform: scale(1.05);
+        }
+        
+        .card-content {
+            flex: 1;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .card-description {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--dark);
+            flex-grow: 1;
+        }
+        
+        .main-btn {
+            display: block;
+            background-color: var(--primary-green);
+            color: var(--light);
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+        
+        .main-btn:hover {
+            background-color: var(--secondary-green);
+        }
+        
+        .main-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .main-btn:hover::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+        
+        footer {
+            background-color: var(--primary-green);
+            color: var(--light);
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+            }
+            
+            .nav-menu li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .card {
+                flex-direction: column;
+            }
+            
+            .card-img {
+                flex: 0 0 100%;
+                max-width: 100%;
+                min-height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo"><span class="m">m</span>YGuitar | <span class="katalog">Katalog</span> produk</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Log Out</a></li>
+                <li><a href="katalog.html">Beranda</a></li>
+                <li><a href="dipesan.php">Telah Dipesan</a></li>
+                <li><a href="role.html">Ubah Role</a></li>
+                <li>
+                    <button id="themeToggle" class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </header>
+    
+    <div class="container">
+        <h1 class="catalog-title">Katalog</h1>
+        <p class="catalog-subtitle">Silakan pilih kategori produk yang ingin anda beli</p>
+        
+        <div class="product-cards">
+            <!-- Gitar Akustik -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="1rev.png" alt="Gitar Akustik" />
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Gitar Akustik</h2>
+                    <p class="card-description">
+                        Gitar akustik adalah jenis gitar tradisional yang menghasilkan suara melalui getaran senar dan rongga resonansi tanpa memerlukan amplifikasi elektronik. Cocok untuk berbagai genre musik seperti folk, country, dan pop akustik. Kami menyediakan berbagai merk dan model gitar akustik berkualitas tinggi untuk pemula hingga profesional.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Gitar Elektrik -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="7.png" alt="Gitar Elektrik" />
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Gitar Elektrik</h2>
+                    <p class="card-description">
+                        Gitar elektrik adalah instrumen yang menggunakan pickup elektromagnetik untuk mengkonversi getaran senar menjadi sinyal listrik. Sempurna untuk genre rock, metal, jazz, dan blues. Dapatkan berbagai pilihan gitar elektrik dengan berbagai pilihan pickup, bridge, dan fitur yang sesuai dengan kebutuhan bermusik Anda.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Gitar Transkustik -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="5.png" alt="Gitar Transkustik" />
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Gitar Transkustik</h2>
+                    <p class="card-description">
+                        Gitar transkustik atau electroacoustic menggabungkan elemen gitar akustik dan elektrik. Dilengkapi dengan pickup bawaan yang memungkinkan Anda memainkannya secara akustik atau disambungkan ke amplifier. Ideal untuk musisi yang membutuhkan fleksibilitas dalam performanya, dengan suara akustik alami saat dimainkan tanpa amplifikasi dan proyeksi suara yang lebih kuat saat dihubungkan ke sistem sound.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Ukulele -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="9.png" alt="Ukulele" />
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Ukulele</h2>
+                    <p class="card-description">
+                        Ukulele adalah instrumen senar kecil yang berasal dari Hawaii, dengan suara yang cerah dan riang. Tersedia dalam beberapa ukuran: soprano, concert, tenor, dan baritone. Sempurna untuk pemula karena mudah dipelajari, dan juga populer di kalangan musisi profesional. Temukan ukulele berkualitas untuk semua tingkat kemampuan dan gaya bermain.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tombol Lihat Produk Utama -->
+        <a href="tampil_produk.php" class="main-btn">Lihat Semua Produk</a>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 mYGuitar. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const htmlElement = document.documentElement;
+            const themeIcon = themeToggle.querySelector('i');
+            
+            themeToggle.addEventListener('click', function() {
+                if (htmlElement.getAttribute('data-theme') === 'light') {
+                    htmlElement.setAttribute('data-theme', 'dark');
+                    themeIcon.className = 'fas fa-sun';
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    htmlElement.setAttribute('data-theme', 'light');
+                    themeIcon.className = 'fas fa-moon';
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                htmlElement.setAttribute('data-theme', savedTheme);
+                if (savedTheme === 'dark') {
+                    themeIcon.className = 'fas fa-sun';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

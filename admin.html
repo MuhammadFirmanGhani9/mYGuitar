@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - mYGuitar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --dark-color: #222;
+            --light-color: #f5f5f5;
+            --sidebar-width: 250px;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--dark-color);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .brand h1 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .brand span {
+            color: var(--primary-color);
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-menu a {
+            color: #adb5bd;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .sidebar-menu a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .user-info {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .user-name {
+            font-size: 14px;
+        }
+        
+        .user-role {
+            font-size: 12px;
+            color: #adb5bd;
+        }
+        
+        .logout {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: #adb5bd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .logout:hover {
+            color: white;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .toggle-sidebar {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--dark-color);
+        }
+        
+        .header-title h1 {
+            font-size: 24px;
+            color: var(--dark-color);
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 8px;
+            padding: 8px 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .search-bar input {
+            border: none;
+            outline: none;
+            padding: 5px;
+            width: 250px;
+        }
+        
+        .search-bar button {
+            background: none;
+            border: none;
+            color: #adb5bd;
+            cursor: pointer;
+        }
+        
+        /* Dashboard Cards */
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            margin-right: 20px;
+        }
+        
+        .card-icon.blue {
+            background-color: #4e73df;
+        }
+        
+        .card-icon.green {
+            background-color: var(--primary-color);
+        }
+        
+        .card-icon.orange {
+            background-color: #f6c23e;
+        }
+        
+        .card-icon.red {
+            background-color: #e74a3b;
+        }
+        
+        .card-info h3 {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+        
+        .card-info p {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        /* Tables */
+        .recent-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+        
+        .table-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .table-header h2 {
+            font-size: 18px;
+            color: var(--dark-color);
+        }
+        
+        .view-all {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table thead th {
+            text-align: left;
+            padding: 12px 15px;
+            background-color: #f8f9fa;
+            color: #6c757d;
+            font-weight: 500;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .data-table tbody td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #dee2e6;
+            color: #495057;
+        }
+        
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status.completed {
+            background-color: rgba(46, 204, 113, 0.15);
+            color: var(--primary-color);
+        }
+        
+        .status.pending {
+            background-color: rgba(246, 194, 62, 0.15);
+            color: #f6c23e;
+        }
+        
+        .status.cancelled {
+            background-color: rgba(231, 74, 59, 0.15);
+            color: #e74a3b;
+        }
+        
+        /* Actions Menu */
+        .actions {
+            position: relative;
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #6c757d;
+        }
+        
+        /* Recent Activities */
+        .activity-list {
+            list-style: none;
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .activity-text h4 {
+            font-size: 14px;
+            color: var(--dark-color);
+            margin-bottom: 3px;
+        }
+        
+        .activity-time {
+            font-size: 12px;
+            color: #6c757d;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .recent-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .toggle-sidebar {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="brand">
+            <h1>mY<span>Guitar</span> Admin</h1>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#"><i class="fas fa-guitar"></i> Produk</a></li>
+            <li><a href="#"><i class="fas fa-shopping-cart"></i> Pesanan</a></li>
+            <li><a href="#"><i class="fas fa-users"></i> Pelanggan</a></li>
+            <li><a href="#"><i class="fas fa-chart-line"></i> Analitik</a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> Pengaturan</a></li>
+            <li><a href="#"><i class="fas fa-bullhorn"></i> Promosi</a></li>
+            <li><a href="#"><i class="fas fa-question-circle"></i> Bantuan</a></li>
+        </ul>
+        
+        <div class="user-info">
+            <div class="user-avatar">A</div>
+            <div>
+                <div class="user-name">Firghan27</div>
+                <div class="user-role">ADMIN</div>
+            </div>
+            <button class="logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <div class="header-title">
+                <button class="toggle-sidebar" id="toggleSidebar"><i class="fas fa-bars"></i></button>
+                <h1>Dashboard</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Cari...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        
+        <!-- Dashboard Cards -->
+        <div class="dashboard-cards">
+            <div class="card">
+                <div class="card-icon blue">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <div class="card-info">
+                    <h3>Total Pesanan</h3>
+                    <p>248</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon green">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="card-info">
+                    <h3>Pendapatan</h3>
+                    <p>Rp142.5Jt</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon orange">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="card-info">
+                    <h3>Pelanggan</h3>
+                    <p>186</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon red">
+                    <i class="fas fa-guitar"></i>
+                </div>
+                <div class="card-info">
+                    <h3>Total Produk</h3>
+                    <p>87</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Orders & Activities -->
+        <div class="recent-container">
+            <div class="table-card">
+                <div class="table-header">
+                    <h2>Pesanan Terbaru</h2>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Pelanggan</th>
+                            <th>Produk</th>
+                            <th>Tanggal</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#ORD-7829</td>
+                            <td>Ahmad Rizki</td>
+                            <td>Gitar Akustik Yamaha F310</td>
+                            <td>10 Mei 2025</td>
+                            <td>Rp1.750.000</td>
+                            <td><span class="status completed">Selesai</span></td>
+                            <td class="actions">
+                                <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#ORD-7830</td>
+                            <td>Ratna Dewi</td>
+                            <td>Ukulele Soprano Mahalo</td>
+                            <td>10 Mei 2025</td>
+                            <td>Rp650.000</td>
+                            <td><span class="status completed">Selesai</span></td>
+                            <td class="actions">
+                                <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#ORD-7831</td>
+                            <td>Budi Santoso</td>
+                            <td>Gitar Elektrik Ibanez GRG170DX</td>
+                            <td>9 Mei 2025</td>
+                            <td>Rp3.450.000</td>
+                            <td><span class="status pending">Dikirim</span></td>
+                            <td class="actions">
+                                <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#ORD-7832</td>
+                            <td>Siti Nuraini</td>
+                            <td>Gitar Transacoustic Yamaha FG-TA</td>
+                            <td>9 Mei 2025</td>
+                            <td>Rp5.800.000</td>
+                            <td><span class="status pending">Dikirim</span></td>
+                            <td class="actions">
+                                <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#ORD-7833</td>
+                            <td>Arif Wijaya</td>
+                            <td>Gitar Akustik Cort AD810E</td>
+                            <td>8 Mei 2025</td>
+                            <td>Rp2.100.000</td>
+                            <td><span class="status cancelled">Dibatalkan</span></td>
+                            <td class="actions">
+                                <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="table-card">
+                <div class="table-header">
+                    <h2>Aktivitas Terbaru</h2>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <div class="activity-icon" style="background-color: #4e73df;">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="activity-text">
+                            <h4>Pelanggan baru mendaftar</h4>
+                            <span class="activity-time">10 menit yang lalu</span>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon" style="background-color: var(--primary-color);">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="activity-text">
+                            <h4>Pesanan baru #ORD-7829</h4>
+                            <span class="activity-time">32 menit yang lalu</span>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon" style="background-color: #f6c23e;">
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        <div class="activity-text">
+                            <h4>Review produk baru</h4>
+                            <span class="activity-time">1 jam yang lalu</span>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon" style="background-color: #e74a3b;">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="activity-text">
+                            <h4>Stok gitar akustik menipis</h4>
+                            <span class="activity-time">2 jam yang lalu</span>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon" style="background-color: #4e73df;">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <div class="activity-text">
+                            <h4>Pengiriman #ORD-7825 selesai</h4>
+                            <span class="activity-time">3 jam yang lalu</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Sidebar Toggle
+        document.getElementById('toggleSidebar').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+        
+        // Logout Button
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            // Redirect to index.html when logged out
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
